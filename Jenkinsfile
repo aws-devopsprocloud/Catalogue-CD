@@ -16,7 +16,7 @@ pipeline {
         string(name: 'ENVIRONMENT', defaultValue: '', description: 'What is the Environment?')
     }
     stages {
-        stage('Print the Package Version & Environment from CATALOGUE-CI') {
+        stage('Get the Package Version & Environment from CATALOGUE-CI') {
             steps {
                 echo "Version: ${params.VERSION}"
 
