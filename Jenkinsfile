@@ -39,6 +39,14 @@ pipeline {
                 """
             }
         }
+        stage('Terraform Apply') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform apply -var-file=${params.ENVIRONMENT}/${params.ENVIRONMENT}.tfvars -var="app_version=${params.VERSION}" -auto-approve
+                """
+            }
+        }
     }
     post {
         always {
