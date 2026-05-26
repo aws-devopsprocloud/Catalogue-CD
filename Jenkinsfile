@@ -31,6 +31,14 @@ pipeline {
                 """
             }
         }
+        stage('Terraform Planning') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform plan -var-file=${params.ENVIRONMENT}/${params.ENVIRONMENT}.tfvars -var="app_version=${params.VERSION}"
+                """
+            }
+        }
     }
     post {
         always {

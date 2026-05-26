@@ -31,3 +31,7 @@ variable "zone_id" {
 variable "domain_name" {
   default = "devopsprocloud.in"
 }
+
+variable "app_version" {
+  
+}

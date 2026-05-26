@@ -2,6 +2,7 @@
 
 component=$1
 environment=$2 
+app_version=$3
 
 cd /home/ec2-user
 sudo dnf install ansible -y 
@@ -11,4 +12,4 @@ sudo dnf install ansible -y
 git clone https://github.com/aws-devopsprocloud/roboshop-ansible-roles-tf.git
 cd roboshop-ansible-roles-tf 
 git pull
-ansible-playbook -e component=$component -e env=$environment main.yaml
+ansible-playbook -e component=$component -e env=$environment -e app_version=$app_version main.yaml
