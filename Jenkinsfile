@@ -23,6 +23,14 @@ pipeline {
                 echo "environment: ${params.ENVIRONMENT}"
             }
         }
+        stage('Terraform Initializing') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform init --backend-config=${params.ENVIRONMENT}/backend.tf -reconfigure
+                """
+            }
+        }
     }
     post {
         always {
