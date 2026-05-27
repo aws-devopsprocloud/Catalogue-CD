@@ -14,6 +14,8 @@ pipeline {
         string(name: 'VERSION', defaultValue: '', description: 'What is the Version?')
 
         string(name: 'ENVIRONMENT', defaultValue: '', description: 'What is the Environment?')
+
+        choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Pick something')
     }
     stages {
         stage('Get the Package Version & Environment from CATALOGUE-CI') {
@@ -40,10 +42,28 @@ pipeline {
             }
         }
         stage('Terraform Apply') {
+            when {
+                expression {
+                    "${params.ACTION}" == 'apply'
+                }
+            }
             steps {
                 sh """
                     cd terraform
                     terraform apply -var-file=${params.ENVIRONMENT}/${params.ENVIRONMENT}.tfvars -var="app_version=${params.VERSION}" -auto-approve
+                """
+            }
+        }
+        stage('Destroying') {
+            when {
+                expression {
+                    "${params.ACTION}" == 'destroy'
+                }
+            }
+            steps {
+                sh """
+                    cd 04-vpn
+                    terraform destroy -var-file=${params.ENVIRONMENT}/${params.ENVIRONMENT}.tfvars -var="app_version=${params.VERSION}" -auto-approve
                 """
             }
         }
