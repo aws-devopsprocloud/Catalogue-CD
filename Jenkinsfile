@@ -62,7 +62,7 @@ pipeline {
             }
             steps {
                 sh """
-                    cd 04-vpn
+                    cd terraform
                     terraform destroy -var-file=${params.ENVIRONMENT}/${params.ENVIRONMENT}.tfvars -var="app_version=${params.VERSION}" -auto-approve
                 """
             }
