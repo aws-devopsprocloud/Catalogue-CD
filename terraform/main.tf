@@ -57,6 +57,9 @@ resource "terraform_data" "catalogue" {
     type = "ssh"
     user = "ec2-user"
     password = "DevOps321"
+    bastion_host = data.aws_ssm_parameter.bastion_public_ip.value
+    bastion_user = "ec2-user"
+    bastion_password = "DevOps321"
     
   }
   
