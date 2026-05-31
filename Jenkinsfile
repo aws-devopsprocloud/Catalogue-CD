@@ -15,7 +15,7 @@ pipeline {
     parameters {
         string(name: 'VERSION', defaultValue: '', description: 'What is the Version?')
 
-        string(name: 'ENVIRONMENT', defaultValue: '', description: 'What is the Environment?')
+        string(name: 'ENVIRONMENT', defaultValue: '', description: 'Specify the target Environment?')
 
         choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Pick something')
     }
